@@ -24,7 +24,8 @@ export default Router.extend({
 		'': 'home',
 		'repos': 'repos',
 		'login': 'login',
-		'auth/callback?:query': 'authCallback' // query will get passed to authCallback
+		'auth/callback?:query': 'authCallback', // query will get passed to authCallback
+		'logout': 'logout'
 	},
 
 	home() {
@@ -51,6 +52,12 @@ export default Router.extend({
 			json: true
 		}, (err, req, body) => {
 			app.me.token = body.token;
+			this.redirectTo('/repos');
 		});
+	},
+
+	logout() {
+		window.localStorage.clear();
+		window.location = '/';
 	}
 });
