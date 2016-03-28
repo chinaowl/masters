@@ -1,10 +1,9 @@
 import React from 'react';
-import app from 'ampersand-app';
 import ampsersandMixin from 'ampersand-react-mixin';
 import NavHelper from './components/nav-helper';
 
 export default React.createClass({
-	mixins: [ampsersandMixin],
+	mixins: [ampsersandMixin], // ampersandMixin adds react lifecycle methods
 
 	displayName: 'Layout',
 
