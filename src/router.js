@@ -6,6 +6,7 @@ import xhr from 'xhr';
 import Layout from './layout';
 import HomePage from './pages/home';
 import ReposPage from './pages/repos';
+import RepoDetail from './pages/repo-detail';
 
 export default Router.extend({
 	renderPage(page, opts = {layout: true}) {
@@ -25,7 +26,8 @@ export default Router.extend({
 		'repos': 'repos',
 		'login': 'login',
 		'auth/callback?:query': 'authCallback', // query will get passed to authCallback
-		'logout': 'logout'
+		'logout': 'logout',
+		'repo/:owner/:name': 'repoDetail'
 	},
 
 	home() {
@@ -34,6 +36,11 @@ export default Router.extend({
 
 	repos() {
 		this.renderPage(<ReposPage repos={app.me.repos}/>);
+	},
+
+	repoDetail(owner, name) {
+		const model = app.me.repos.getByFullName(owner + '/' + name);
+		this.renderPage(<RepoDetail repo={model}/>);
 	},
 
 	login() {
