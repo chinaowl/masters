@@ -14,6 +14,8 @@ export default Collection.extend(githubAuthMixin, {
 			model = new Repo({full_name: fullName});
 		}
 
+		model.fetch();
+
 		return model;
 	}
 });
