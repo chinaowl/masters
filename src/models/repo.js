@@ -1,7 +1,8 @@
 import Model from 'ampersand-model';
-import githubMixin from '../helpers/github-auth-mixin';
+import githubAuthMixin from '../helpers/github-auth-mixin';
+import LabelCollection from './label-collection';
 
-export default Model.extend(githubMixin, {
+export default Model.extend(githubAuthMixin, {
 	url() {
 		return 'https://api.github.com/repos/' + this.full_name;
 	},
@@ -19,5 +20,14 @@ export default Model.extend(githubMixin, {
 				return '/repo/' + this.full_name;
 			}
 		}
+	},
+
+	collections: {
+		labels: LabelCollection
+	},
+
+	fetch() {
+		Model.prototype.fetch.apply(this, arguments);
+		this.labels.fetch();
 	}
 });
