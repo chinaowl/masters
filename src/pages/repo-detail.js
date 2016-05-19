@@ -1,6 +1,9 @@
 import React from 'react';
+import ampersandMixin from 'ampersand-react-mixin';
 
 export default React.createClass({
+	mixins: [ampersandMixin],
+
 	displayName: 'RepoDetail',
 
 	render() {
